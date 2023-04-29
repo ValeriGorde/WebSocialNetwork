@@ -60,7 +60,6 @@
             var ddlMonth = document.getElementById("ddlMonth");
             var ddlYear = document.getElementById("ddlYear");
             var ddlDay = document.getElementById("ddlDay");
-
             var y = ddlYear.options[ddlYear.selectedIndex].value;
             var m = ddlMonth.options[ddlMonth.selectedIndex].value != 0;
             if (ddlMonth.options[ddlMonth.selectedIndex].value != 0 && ddlYear.options[ddlYear.selectedIndex].value != 0) {
@@ -71,7 +70,6 @@
                 }
             }
         }
-
         function AddOption(ddl, text, value) {
             var opt = document.createElement("OPTION");
             opt.text = text;

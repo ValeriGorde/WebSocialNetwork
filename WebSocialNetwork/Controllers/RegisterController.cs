@@ -7,7 +7,7 @@ using WebSocialNetwork.Views;
 
 namespace WebSocialNetwork.Controllers
 {
-    public class RegisterController: Controller
+    public class RegisterController : Controller
     {
         private IMapper _mapper;
 
@@ -21,11 +21,12 @@ namespace WebSocialNetwork.Controllers
             _signInManager = signInManager;
         }
 
+
         [Route("Register")]
         [HttpGet]
         public IActionResult Register()
         {
-            return View("Shared/Register");
+            return View("Home/Register");
         }
 
         [Route("RegisterPartTwo")]
@@ -34,6 +35,7 @@ namespace WebSocialNetwork.Controllers
         {
             return View("RegisterPartTwo", model);
         }
+
 
         [Route("Register")]
         [HttpPost]
@@ -47,7 +49,7 @@ namespace WebSocialNetwork.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Home/Index");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

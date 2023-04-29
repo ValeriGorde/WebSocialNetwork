@@ -1,9 +1,11 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using AutoMapper;
 using WebSocialNetwork.DB;
 using WebSocialNetwork.Views;
+using WebSocialNetwork.Extentions;
+using WebSocialNetwork.DB.Repository;
+using WebSocialNetwork.Models;
 
 namespace WebSocialNetwork
 {
@@ -12,11 +14,18 @@ namespace WebSocialNetwork
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
             // Add services to the container.
+                       
+            builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlite(connection))
+                .AddUnitOfWork()
+                .AddCustomRepository<Friend, FriendRepository>()
+                .AddCustomRepository<Message, MessageRepository>();
+
+
             builder.Services.AddControllersWithViews();
-            string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlite(connection));
+            builder.Services.AddRazorPages();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -34,6 +43,7 @@ namespace WebSocialNetwork
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDBContext>();
+
 
             var app = builder.Build();
 
@@ -56,6 +66,7 @@ namespace WebSocialNetwork
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapRazorPages();
 
             app.Run();
         }

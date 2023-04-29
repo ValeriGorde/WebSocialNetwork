@@ -8,7 +8,6 @@ namespace WebSocialNetwork.Views
 
         public string LastName { get; set; }
 
-        public string MiddleName { get; set; }
 
         public DateTime BirthDate { get; set; }
 
@@ -20,12 +19,12 @@ namespace WebSocialNetwork.Views
 
         public string GetFullName()
         {
-            return FirstName + " " + MiddleName + " " + LastName;
+            return FirstName + " " + LastName;
         }
 
         public User()
         {
-            Image = "https://via.placeholder.com/500";
+            Image = "https://mobimg.b-cdn.net/v3/fetch/76/76789104c7c3e565cdca3895537e0172.jpeg";
             Status = "Ура! Я в соцсети!";
             About = "Информация обо мне.";
         }

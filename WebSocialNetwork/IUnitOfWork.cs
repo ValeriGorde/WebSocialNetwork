@@ -1,4 +1,6 @@
-﻿namespace WebSocialNetwork
+﻿using WebSocialNetwork.DB.Repository;
+
+namespace WebSocialNetwork
 {
     public interface IUnitOfWork: IDisposable
     {
